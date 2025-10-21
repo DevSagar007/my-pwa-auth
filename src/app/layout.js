@@ -1,6 +1,7 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import PWAInstaller from "./components/PWAInstaller";
+import PWARefreshBackButton from "./components/PWARefreshBackButton";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -37,13 +38,14 @@ export default function RootLayout({ children }) {
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
         <meta name="apple-mobile-web-app-title" content="My App" />
         <link rel="manifest" href="/manifest.json" />
-        <link rel="icon" href="/pwa.svg" />
-        <link rel="apple-touch-icon" href="/pwa.svg" />
+        <link rel="icon" href="/globe.svg" />
+        <link rel="apple-touch-icon" href="/globe.svg" />
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased pt-14`}
       >
         <PWAInstaller />
+        <PWARefreshBackButton />
         {children}
       </body>
     </html>
