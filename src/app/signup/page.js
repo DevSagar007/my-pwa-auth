@@ -40,6 +40,12 @@ export default function Signup() {
         <button className="bg-blue-600 text-white py-2 rounded hover:bg-blue-700">
           Sign Up
         </button>
+        <button
+          onClick={() => router.push("/login")}
+          className="bg-gray-200 text-gray-700 py-2 rounded hover:bg-gray-300"
+        >
+          Already have an account? Login
+        </button>
       </form>
     </div>
   );

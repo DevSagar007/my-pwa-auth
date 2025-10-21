@@ -7,7 +7,7 @@ export default function Home() {
         <div className="text-center">
           <h1 className="font-bold text-4xl mb-5">Hello PWA App !</h1>
           <Link
-            href="/dashboard"
+            href="/login"
             className="inline-flex items-center justify-center rounded-lg border border-gray-300 bg-white px-5 h-[50px] text-sm font-bold text-heading hover:bg-primary hover:text-white hover:border-primary"
           >
             Login Here

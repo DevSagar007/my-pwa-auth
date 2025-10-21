@@ -8,50 +8,88 @@ import Link from "next/link";
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
   const router = useRouter();
 
   const handleLogin = async (e) => {
     e.preventDefault();
+    setError("");
+    setLoading(true);
     try {
       await signInWithEmailAndPassword(auth, email, password);
       router.push("/dashboard");
     } catch (error) {
-      alert(error.message);
+      setError(error.message);
+      setLoading(false);
     }
   };
 
   return (
-    <div className="p-6 max-w-sm mx-auto">
-      <h2 className="text-2xl font-semibold mb-4">Login</h2>
-      <form onSubmit={handleLogin} className="flex flex-col gap-3">
-        <input
-          type="email"
-          placeholder="Email"
-          className="border p-2 rounded"
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
-        <input
-          type="password"
-          placeholder="Password"
-          className="border p-2 rounded"
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
-        <button className="bg-green-600 text-white py-2 rounded hover:bg-green-700">
-          Login
-        </button>
-        <Link href="/signup" className="mt-3 inline-flex">
-          <button className="bg-green-600 text-white py-2 rounded w-100 hover:bg-green-700">
-            Sign Up
-          </button>
-        </Link>
-        <Link href="/signup" className="mt-3 inline-flex">
-          <button className="bg-green-600 text-white py-2 rounded w-100 hover:bg-green-700">
-            forgot password
-          </button>
-        </Link>
-      </form>
+    <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-md w-full space-y-8">
+        <div>
+          <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
+            Sign in to your account
+          </h2>
+        </div>
+        <form className="mt-8 space-y-6" onSubmit={handleLogin}>
+          {error && (
+            <div className="rounded-md bg-red-50 p-4">
+              <p className="text-sm font-medium text-red-800">{error}</p>
+            </div>
+          )}
+          <div className="rounded-md shadow-sm -space-y-px">
+            <div>
+              <input
+                type="email"
+                placeholder="Email address"
+                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
+                onChange={(e) => setEmail(e.target.value)}
+                value={email}
+                required
+              />
+            </div>
+            <div>
+              <input
+                type="password"
+                placeholder="Password"
+                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
+                onChange={(e) => setPassword(e.target.value)}
+                value={password}
+                required
+              />
+            </div>
+          </div>
+
+          <div className="flex items-center justify-between">
+            <div className="flex items-center">
+              <Link href="/forgot-password" className="text-sm text-blue-600 hover:text-blue-500">
+                Forgot your password?
+              </Link>
+            </div>
+          </div>
+
+          <div>
+            <button
+              type="submit"
+              disabled={loading}
+              className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50"
+            >
+              {loading ? "Signing in..." : "Sign in"}
+            </button>
+          </div>
+
+          <div className="text-center">
+            <p className="text-sm text-gray-600">
+              Don't have an account?{" "}
+              <Link href="/signup" className="font-medium text-blue-600 hover:text-blue-500">
+                Sign up
+              </Link>
+            </p>
+          </div>
+        </form>
+      </div>
     </div>
   );
 }
