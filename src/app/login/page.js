@@ -3,6 +3,7 @@ import { useState } from "react";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../../firebaseConfig";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -40,6 +41,16 @@ export default function Login() {
         <button className="bg-green-600 text-white py-2 rounded hover:bg-green-700">
           Login
         </button>
+        <Link href="/signup" className="mt-3 inline-flex">
+          <button className="bg-green-600 text-white py-2 rounded w-100 hover:bg-green-700">
+            Sign Up
+          </button>
+        </Link>
+        <Link href="/signup" className="mt-3 inline-flex">
+          <button className="bg-green-600 text-white py-2 rounded w-100 hover:bg-green-700">
+            forgot password
+          </button>
+        </Link>
       </form>
     </div>
   );
